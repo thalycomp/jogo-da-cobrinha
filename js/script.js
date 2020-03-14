@@ -1,7 +1,10 @@
+var maxPont = JSON.parse(localStorage.getItem('points')) || 0;
 const canvas = document.getElementById('snake');
 const start = document.getElementById('start');
 const context = canvas.getContext('2d');
 const box = 32;
+let pont = 0;
+//let maxPont = 0;
 
 let snake = [];
 snake[0] = {
@@ -19,6 +22,17 @@ let direction = 'right';
 function criarBg() {
     context.fillStyle = '#538cc6';
     context.fillRect(0, 0, 16 * box, 16 * box);
+}
+
+function text(pont){
+    //context.fillStyle = 'white';
+    context.font = "20px Arial";
+    context.fillText(`SCORE: ${pont}`, 340, 30);
+
+}
+function maxPoint(maxPont){
+    context.font = "20px Arial";
+    context.fillText(`MAX-SCORE: ${maxPont}`, 70, 30);
 }
 
 function criarSnake() {
@@ -73,6 +87,12 @@ function iniciarJogo() {
     criarBg();
     criarSnake();
     drawFood();
+    text(pont);
+    if(pont >= maxPont){
+        maxPont = pont;
+    }
+    maxPoint(maxPont);
+    updatePoint(maxPont);
 
     let snakeX = snake[0].x;
     let snakeY = snake[0].y;
@@ -87,6 +107,7 @@ function iniciarJogo() {
     } else {
         food.x = Math.floor(Math.random() * 15 + 1) * box;
         food.y = Math.floor(Math.random() * 15 + 1) * box;
+        pont += 1;
     }
 
     const newHead = {
@@ -106,9 +127,11 @@ start.onclick = () => {
     resetGame();
 }
 
+function updatePoint(){
+    localStorage.setItem('points', JSON.stringify(maxPont));
+}
 function stopGame(){
     const div = document.getElementById('conteiner');
-    const canvas = document.getElementById('snake');
     var novo = document.createElement('div');
     var text = document.createElement('p');
     text.innerHTML = 'You lost! :('
