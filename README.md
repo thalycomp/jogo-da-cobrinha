@@ -6,5 +6,5 @@ Jogo: https://thalycomp.netlify.app
 
 [//]: # (Add your gifs/images here:)
 <div align="center">
-  <img src="https://ibb.co/Kwc6t00" alt="demo" height="500">
+  <img src="https://i.ibb.co/py62H00/simplescreenrecorder-2020-09-20-21-15-08.gif" alt="demo" height="500">
 </div>
